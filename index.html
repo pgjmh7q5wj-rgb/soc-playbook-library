@@ -181,6 +181,42 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px}
 .dash-tab.active{color:var(--accent)!important;border-bottom-color:var(--accent)!important}
+/* ── Updates view ─────────────────────────────────────────────────────────── */
+#updatesview{display:none!important;padding:30px;max-width:900px;margin:0 auto}
+#updatesview.visible{display:block!important}
+.upd-header{margin-bottom:24px}
+.upd-header h2{font-size:22px;font-weight:800;color:var(--text1);margin-bottom:4px}
+.upd-header p{font-size:13px;color:var(--text2)}
+.upd-status-bar{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.upd-stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 20px;flex:1;min-width:140px}
+.upd-stat-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.upd-stat-val{font-size:20px;font-weight:800;color:var(--text1)}
+.upd-stat-sub{font-size:11px;color:var(--text2);margin-top:2px}
+.upd-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;cursor:pointer;transition:border-color .15s}
+.upd-card:hover{border-color:var(--accent)}
+.upd-card-header{display:flex;align-items:center;gap:12px;padding:14px 18px}
+.upd-card-icon{font-size:18px;flex-shrink:0}
+.upd-card-title{font-size:14px;font-weight:700;color:var(--text1);flex:1}
+.upd-card-date{font-size:11px;color:var(--text3)}
+.upd-card-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.upd-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.upd-badge-xsoar{background:rgba(124,58,237,.15);color:#7c3aed}
+.upd-badge-mitre{background:rgba(8,145,178,.15);color:#0891b2}
+.upd-badge-ok{background:rgba(5,150,105,.12);color:#059669}
+.upd-card-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border)}
+.upd-card-body.open{display:block}
+.upd-card-body .md-content h1{font-size:16px}
+.upd-card-body .md-content h2{font-size:14px}
+.upd-card-body .md-content h3{font-size:13px}
+.upd-empty{text-align:center;padding:60px 20px;color:var(--text3)}
+.upd-empty-icon{font-size:48px;margin-bottom:12px}
+/* Updates button in header */
+.upd-nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .15s}
+.upd-nav-btn:hover{background:rgba(255,255,255,.2)}
+.upd-nav-btn.active{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.4)}
+.upd-count-badge{background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:1px 5px;border-radius:10px;display:none}
+.upd-count-badge.show{display:inline-block}
+
 </style>
 </head>
 <body>
@@ -211,7 +247,10 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
       <div class="hstat"><b id="statP1" style="color:var(--p1)">—</b> P1</div>
       <div class="hstat"><b id="statP2" style="color:var(--p2)">—</b> P2</div>
     </div>
-  </header>
+        <button class="upd-nav-btn" id="updBtn" onclick="showUpdates()">
+        🔄 Updates <span class="upd-count-badge" id="updCountBadge">0</span>
+      </button>
+    </header>
   <div class="layout">
     <aside>
       <div class="sb-head">
@@ -245,7 +284,36 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
         <div class="tabs" id="tabBar"></div>
         <div class="tc" id="tabContent"></div>
       </div>
-    </main>
+          <div id="updatesview">
+        <div class="upd-header">
+          <h2>🔄 Update Monitor</h2>
+          <p>Automatická kontrola MITRE ATT&CK + XSOAR pack aktualizací · každé pondělí</p>
+        </div>
+        <div class="upd-status-bar" id="updStatusBar">
+          <div class="upd-stat">
+            <div class="upd-stat-label">Poslední kontrola</div>
+            <div class="upd-stat-val" id="updLastCheck">—</div>
+            <div class="upd-stat-sub">každé pondělí 08:00 UTC</div>
+          </div>
+          <div class="upd-stat">
+            <div class="upd-stat-label">ATT&CK verze</div>
+            <div class="upd-stat-val" id="updAttackVer">—</div>
+            <div class="upd-stat-sub">enterprise-attack</div>
+          </div>
+          <div class="upd-stat">
+            <div class="upd-stat-label">XSOAR packs</div>
+            <div class="upd-stat-val" id="updPackCount">—</div>
+            <div class="upd-stat-sub">sledovaných integrací</div>
+          </div>
+          <div class="upd-stat">
+            <div class="upd-stat-label">Reporty celkem</div>
+            <div class="upd-stat-val" id="updReportCount">—</div>
+            <div class="upd-stat-sub">v historii</div>
+          </div>
+        </div>
+        <div id="updReportList"></div>
+      </div>
+  </main>
   </div>
 </div>
 
@@ -550,6 +618,8 @@ async function openPB(id){
   if(!pb) return;
 
   document.getElementById('dashboard').style.display='none';
+  document.getElementById('updatesview').classList.remove('visible');
+  document.getElementById('updBtn').classList.remove('active');
   document.getElementById('pbview').style.display='block';
   document.querySelectorAll('.pb-item').forEach(el=>{
     el.classList.toggle('active', el.querySelector('.pb-id')?.textContent===id);
@@ -743,6 +813,8 @@ function showDash(){
   currentTab = 'overview';
   document.getElementById('dashboard').style.display='block';
   document.getElementById('pbview').style.display='none';
+  document.getElementById('updatesview').classList.remove('visible');
+  document.getElementById('updBtn').classList.remove('active');
   document.querySelectorAll('.pb-item').forEach(el=>el.classList.remove('active'));
   renderPGrid(MANIFEST);
   document.getElementById('searchInput').value='';
@@ -751,6 +823,105 @@ function showDash(){
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
+
+// ── Updates view ──────────────────────────────────────────────────────────────
+function showUpdates(){
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('pbview').style.display='none';
+  document.getElementById('updatesview').classList.add('visible');
+  document.getElementById('updBtn').classList.add('active');
+  document.querySelectorAll('.pb-item').forEach(el=>el.classList.remove('active'));
+  loadReports();
+}
+
+async function loadReports(){
+  const list = document.getElementById('updReportList');
+  list.innerHTML = '<div class="upd-empty"><div class="upd-empty-icon">⏳</div><div>Načítám reporty...</div></div>';
+  try {
+    const [avResp, pvResp, idxResp] = await Promise.allSettled([
+      fetch('data/attack_version.json'),
+      fetch('data/xsoar_pack_versions.json'),
+      fetch('reports/index.json'),
+    ]);
+    if(avResp.status==='fulfilled' && avResp.value.ok){
+      const av = await avResp.value.json();
+      document.getElementById('updAttackVer').textContent = av.version || '—';
+      if(av.date) document.getElementById('updLastCheck').textContent = av.date;
+    }
+    if(pvResp.status==='fulfilled' && pvResp.value.ok){
+      const pv = await pvResp.value.json();
+      const cnt = Object.keys(pv).filter(k=>!k.startsWith('_')).length;
+      document.getElementById('updPackCount').textContent = cnt || '—';
+    }
+    if(idxResp.status==='fulfilled' && idxResp.value.ok){
+      const idx = await idxResp.value.json();
+      const reports = idx.reports || [];
+      document.getElementById('updReportCount').textContent = reports.length;
+      if(idx.last_check) document.getElementById('updLastCheck').textContent = idx.last_check;
+      const actionable = reports.filter(r=>r.has_changes).length;
+      const badge = document.getElementById('updCountBadge');
+      if(actionable > 0){ badge.textContent = actionable; badge.classList.add('show'); }
+      renderReportList(reports);
+    } else {
+      list.innerHTML = `<div class="upd-empty"><div class="upd-empty-icon">✅</div><div style="font-weight:700;margin-bottom:8px">Baseline uložena</div><div style="font-size:13px;color:var(--text2)">První kontrola proběhla úspěšně.<br>Příští pondělí proběhne první srovnávací kontrola.</div></div>`;
+      document.getElementById('updReportCount').textContent = '0';
+    }
+  } catch(e) {
+    list.innerHTML = `<div class="upd-empty"><div class="upd-empty-icon">⚠️</div><div>Chyba při načítání: ${e.message}</div></div>`;
+  }
+}
+
+function renderReportList(reports){
+  const list = document.getElementById('updReportList');
+  if(!reports.length){
+    list.innerHTML = '<div class="upd-empty"><div class="upd-empty-icon">✅</div><div>Zatím žádné reporty.</div></div>';
+    return;
+  }
+  const sorted = [...reports].sort((a,b)=>b.date.localeCompare(a.date));
+  list.innerHTML = sorted.map((r,i) => {
+    const icon   = r.has_changes ? '🔴' : '✅';
+    const xBadge = r.xsoar_count  ? `<span class="upd-badge upd-badge-xsoar">XSOAR ${r.xsoar_count}</span>` : '';
+    const mBadge = r.mitre_count  ? `<span class="upd-badge upd-badge-mitre">ATT&CK ${r.mitre_count}</span>` : '';
+    const okBadge= !r.has_changes ? `<span class="upd-badge upd-badge-ok">Beze změn</span>` : '';
+    return `<div class="upd-card" onclick="toggleReport(this,'${r.file}')"><div class="upd-card-header"><div class="upd-card-icon">${icon}</div><div style="flex:1"><div class="upd-card-title">${r.date}</div><div class="upd-card-badges">${xBadge}${mBadge}${okBadge}</div></div><div class="upd-card-date">▼</div></div><div class="upd-card-body" id="upd-body-${i}"></div></div>`;
+  }).join('');
+}
+
+const _mdCache = {};
+async function toggleReport(card, file){
+  const bodyEl = card.querySelector('.upd-card-body');
+  const arrow  = card.querySelector('.upd-card-date');
+  if(bodyEl.classList.contains('open')){ bodyEl.classList.remove('open'); arrow.textContent='▼'; return; }
+  arrow.textContent = '▲';
+  bodyEl.classList.add('open');
+  if(_mdCache[file]){ bodyEl.innerHTML = _mdCache[file]; return; }
+  bodyEl.innerHTML = '<div style="padding:12px;color:var(--text3)">Načítám...</div>';
+  try {
+    const resp = await fetch('reports/' + file);
+    if(!resp.ok) throw new Error('HTTP ' + resp.status);
+    const md = await resp.text();
+    const html = '<div class="md-content">' + marked.parse(md) + '</div>';
+    _mdCache[file] = html;
+    bodyEl.innerHTML = html;
+  } catch(e) {
+    bodyEl.innerHTML = `<div style="padding:12px;color:var(--p1)">Chyba: ${e.message}</div>`;
+  }
+}
+
+(async function initUpdatesBadge(){
+  try {
+    const r = await fetch('reports/index.json');
+    if(!r.ok) return;
+    const idx = await r.json();
+    const actionable = (idx.reports||[]).filter(x=>x.has_changes).length;
+    if(actionable > 0){
+      const b = document.getElementById('updCountBadge');
+      b.textContent = actionable;
+      b.classList.add('show');
+    }
+  } catch(_){}
+})();
+
 window.addEventListener('DOMContentLoaded', boot);
 
 // ══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,43 @@
+# ── Binární dokumenty (verzované v OneDrive) ──────────────────────────────────
+*.docx
+*.xlsx
+*.pdf
+*.csv
+
+# ── Interní AI instrukce ──────────────────────────────────────────────────────
+CLAUDE.md
+AGENTS.md
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+env/
+*.egg-info/
+
+# ── SharePoint deploy ─────────────────────────────────────────────────────────
+sharepoint_deploy/
+
+# ── Lokální pracovní soubory ──────────────────────────────────────────────────
+extracted/
+normalized/
+*.zip
+*.tmp
+*.log
+
+# ── OS soubory ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+
+# ── Secrets ───────────────────────────────────────────────────────────────────
+.env
+*.key
+secrets.json
