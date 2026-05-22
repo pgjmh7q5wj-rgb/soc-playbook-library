@@ -1,0 +1,127 @@
+{
+  "version": "2.0",
+  "updated": "2026-05-21",
+  "playbooks": [
+    {
+      "id": "PB-00",
+      "title": "IR Foundation – Policy & Preparation",
+      "category": "Foundation",
+      "severity": "N/A",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-00.md",
+      "tags": ["NIST", "ISO 27035", "Governance", "SLA", "RACI", "Příprava"],
+      "mitre": []
+    },
+    {
+      "id": "PB-01",
+      "title": "Phishing – Uživatelské nahlášení",
+      "category": "Email",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-01.md",
+      "tags": ["Phishing", "Email", "Social Engineering", "Credential Harvesting"],
+      "mitre": ["T1566", "T1598", "T1204"]
+    },
+    {
+      "id": "PB-02",
+      "title": "Malware Detection – Endpoint",
+      "category": "Endpoint",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-02.md",
+      "tags": ["Malware", "EDR", "Endpoint", "Quarantine"],
+      "mitre": ["T1059", "T1055", "T1036", "T1070"]
+    },
+    {
+      "id": "PB-03",
+      "title": "Ransomware Indicator",
+      "category": "Critical",
+      "severity": "P1",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-03.md",
+      "tags": ["Ransomware", "Encryption", "Containment", "Critical"],
+      "mitre": ["T1486", "T1490", "T1489", "T1083"]
+    },
+    {
+      "id": "PB-04",
+      "title": "Brute Force + Successful Login",
+      "category": "Identity",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-04.md",
+      "tags": ["Brute Force", "Authentication", "Active Directory", "Account Lockout"],
+      "mitre": ["T1110", "T1078", "T1021"]
+    },
+    {
+      "id": "PB-05",
+      "title": "Compromised Account",
+      "category": "Identity",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-05.md",
+      "tags": ["Account Compromise", "Credential Theft", "Lateral Movement", "Entra ID"],
+      "mitre": ["T1078", "T1098", "T1550"]
+    },
+    {
+      "id": "PB-06",
+      "title": "Data Exfiltration – Síťová data",
+      "category": "Exfiltration",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-06.md",
+      "tags": ["Exfiltration", "DLP", "Network", "Data Loss"],
+      "mitre": ["T1048", "T1041", "T1567", "T1030"]
+    },
+    {
+      "id": "PB-08",
+      "title": "C2 Beacon / Suspicious Outbound",
+      "category": "Network",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-08.md",
+      "tags": ["C2", "Beacon", "Outbound", "DNS Tunneling", "Firewall"],
+      "mitre": ["T1071", "T1095", "T1572", "T1090", "T1102"]
+    },
+    {
+      "id": "PB-09",
+      "title": "Business Email Compromise (BEC)",
+      "category": "Email",
+      "severity": "P1",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-09.md",
+      "tags": ["BEC", "Fraud", "Email", "Financial", "CEO Fraud"],
+      "mitre": ["T1566", "T1585", "T1534", "T1036"]
+    },
+    {
+      "id": "PB-10",
+      "title": "Cloud Resource Misuse",
+      "category": "Cloud",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-10.md",
+      "tags": ["Cloud", "Azure", "AWS", "Misconfiguration", "Crypto Mining"],
+      "mitre": ["T1078", "T1496", "T1530", "T1537"]
+    },
+    {
+      "id": "PB-12",
+      "title": "Geo-based Login / Impossible Travel",
+      "category": "Identity",
+      "severity": "P2",
+      "version": "1.0",
+      "status": "FINAL",
+      "file": "playbooks/PB-12.md",
+      "tags": ["Geo", "Impossible Travel", "Entra ID", "VPN", "Conditional Access"],
+      "mitre": ["T1078", "T1134", "T1110"]
+    }
+  ]
+}

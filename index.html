@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOC Playbook Library v2.0</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f0f4f8;color:#111827;overflow:hidden}
+:root{
+  --bg0:#f0f4f8;--bg1:#ffffff;--bg2:#f5f7fb;--bg3:#e8edf5;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,102,204,0.25);
+  --accent:#0066cc;--accent2:#059669;--warn:#d97706;--danger:#dc2626;
+  --text1:#111827;--text2:#4b5563;--text3:#9ca3af;
+  --p1:#dc2626;--p2:#ea580c;--p3:#ca8a04;--p4:#059669;
+  --sw:280px
+}
+#app{display:flex;flex-direction:column;height:100vh}
+header{height:54px;background:var(--bg1);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;z-index:10}
+.layout{display:flex;flex:1;overflow:hidden}
+.logo{display:flex;align-items:center;gap:10px;white-space:nowrap;cursor:pointer}
+.logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),#0080ff);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-text{font-size:13px;font-weight:700;letter-spacing:.3px}
+.logo-text span{color:var(--accent)}
+.hsearch{flex:1;max-width:380px;position:relative}
+.hsearch input{width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--text1);padding:7px 12px 7px 34px;border-radius:8px;font-size:13px;outline:none;transition:border-color .2s}
+.hsearch input:focus{border-color:var(--accent)}
+.hsearch svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--text3);fill:none;pointer-events:none}
+.hstats{margin-left:auto;display:flex;gap:20px}
+.hstat{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text2)}
+.hstat b{color:var(--accent);font-size:15px}
+aside{width:var(--sw);background:var(--bg1);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
+.sb-head{padding:14px 12px;border-bottom:1px solid var(--border)}
+.sb-head h3{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);color:var(--text2);background:transparent;transition:all .15s;user-select:none}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pb-list{flex:1;overflow-y:auto;padding:8px}
+.pb-list::-webkit-scrollbar{width:3px}
+.pb-list::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+.pb-item{padding:11px 11px 11px 10px;border-radius:8px;cursor:pointer;margin-bottom:4px;border:1px solid transparent;transition:all .15s;display:block;width:100%;text-align:left;background:transparent}
+.pb-item:hover{background:var(--bg2);border-color:var(--border)}
+.pb-item.active{background:var(--bg3);border-color:var(--accent)}
+.pb-item-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.pb-id{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--bg0);color:var(--accent);letter-spacing:.3px;flex-shrink:0;margin-top:1px}
+.pb-name{font-size:12px;font-weight:600;color:var(--text1);line-height:1.35}
+.pb-bot{display:flex;align-items:center;gap:6px;margin-top:4px}
+.sv{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px}
+.sv-p1{background:rgba(220,38,38,.15);color:var(--p1)}
+.sv-p2{background:rgba(234,88,12,.15);color:var(--p2)}
+.sv-p3{background:rgba(202,138,4,.15);color:var(--p3)}
+.sv-p4{background:rgba(5,150,105,.15);color:var(--p4)}
+.sv-na{background:rgba(0,0,0,.06);color:var(--text2)}
+.pb-ver{font-size:10px;color:var(--text3);margin-left:auto}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--accent2);flex-shrink:0}
+main{flex:1;overflow-y:auto;background:var(--bg0)}
+main::-webkit-scrollbar{width:5px}
+main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
+#dashboard{padding:30px}
+.dt{font-size:22px;font-weight:800;color:var(--text1);margin-bottom:3px}
+.ds{font-size:13px;color:var(--text2);margin-bottom:24px}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+.scard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px}
+.sl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.sv2{font-size:26px;font-weight:800;color:var(--accent)}
+.sd{font-size:11px;color:var(--text2);margin-top:3px}
+.sec{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:var(--border)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:26px}
+.pgc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:15px 15px 15px 14px;cursor:pointer;transition:all .2s}
+.pgc:hover{background:var(--bg3);border-color:var(--border2);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.pgc-id{font-size:10px;font-weight:700;color:var(--accent);margin-bottom:5px}
+.pgc-t{font-size:12px;font-weight:600;color:var(--text1);margin-bottom:8px;line-height:1.4}
+.pgc-tags{display:flex;flex-wrap:wrap;gap:3px}
+.tag{font-size:10px;padding:2px 7px;border-radius:3px;background:var(--bg0);color:var(--text2)}
+/* Playbook markdown view */
+#pbview{display:none;padding:0}
+.pb-header{background:var(--bg1);border-bottom:1px solid var(--border);padding:20px 30px 16px;display:flex;align-items:flex-start;gap:16px}
+.pb-header-left{flex:1}
+.pb-header-id{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-bottom:4px}
+.pb-header-title{font-size:20px;font-weight:800;color:var(--text1);margin-bottom:10px}
+.pb-header-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pbm{font-size:11px;padding:3px 10px;border-radius:4px;font-weight:600}
+.pbm-cat{background:rgba(0,102,204,.1);color:var(--accent)}
+.pbm-ver{background:var(--bg3);color:var(--text2)}
+.pbm-status{background:rgba(5,150,105,.1);color:var(--accent2)}
+.pb-back{background:var(--bg2);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;flex-shrink:0;transition:all .15s}
+.pb-back:hover{background:var(--bg3);color:var(--text1)}
+.pb-tags-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+/* Markdown content styling */
+.md-content{padding:30px;max-width:1100px}
+.md-content h1{font-size:20px;font-weight:800;color:var(--text1);margin:32px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+.md-content h1:first-child{margin-top:0}
+.md-content h2{font-size:16px;font-weight:700;color:var(--text1);margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.md-content h3{font-size:14px;font-weight:700;color:var(--accent);margin:18px 0 8px}
+.md-content h4{font-size:13px;font-weight:600;color:var(--text2);margin:14px 0 6px}
+.md-content p{font-size:13px;line-height:1.7;color:var(--text1);margin-bottom:10px}
+.md-content ul,.md-content ol{font-size:13px;line-height:1.7;color:var(--text1);margin-bottom:10px;padding-left:20px}
+.md-content li{margin-bottom:3px}
+.md-content strong{font-weight:700;color:var(--text1)}
+.md-content code{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-size:12px;font-family:'Courier New',monospace;color:var(--accent)}
+.md-content pre{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;overflow-x:auto;margin-bottom:14px}
+.md-content pre code{background:none;border:none;padding:0;font-size:12px;color:var(--text1)}
+.md-content table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}
+.md-content table th{background:var(--bg3);padding:8px 12px;text-align:left;font-weight:700;color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;border:1px solid var(--border)}
+.md-content table td{padding:8px 12px;border:1px solid var(--border);vertical-align:top;color:var(--text1);line-height:1.5}
+.md-content table tr:nth-child(even) td{background:var(--bg2)}
+.md-content table tr:hover td{background:var(--bg3)}
+.md-content hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+.md-content blockquote{border-left:3px solid var(--accent);padding:10px 16px;background:rgba(0,102,204,.05);border-radius:0 6px 6px 0;margin-bottom:12px;font-size:13px;color:var(--text2)}
+/* Loading state */
+.loading{display:flex;align-items:center;justify-content:center;padding:60px;gap:14px;color:var(--text3)}
+.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-box{margin:30px;padding:20px;background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.2);border-radius:10px;color:var(--danger);font-size:13px}
+/* Category colors */
+.cat-Foundation{border-left-color:#0066cc!important}
+.cat-Email{border-left-color:#ea580c!important}
+.cat-Endpoint{border-left-color:#dc2626!important}
+.cat-Critical{border-left-color:#991b1b!important}
+.cat-Identity{border-left-color:#7c3aed!important}
+.cat-Network{border-left-color:#0891b2!important}
+.cat-Cloud{border-left-color:#0d9488!important}
+.cat-Exfiltration{border-left-color:#be185d!important}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="logo" onclick="showDash()">
+      <div class="logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="logo-text">SOC <span>Playbook</span> Library</div>
+    </div>
+    <div class="hsearch">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Hledat playbook, MITRE ID, tag…" id="searchInput" oninput="doSearch(this.value)">
+    </div>
+    <div class="hstats">
+      <div class="hstat"><b id="statTotal">—</b> playbooků</div>
+      <div class="hstat"><b id="statP1" style="color:var(--p1)">—</b> P1</div>
+      <div class="hstat"><b id="statP2" style="color:var(--p2)">—</b> P2</div>
+    </div>
+  </header>
+  <div class="layout">
+    <aside>
+      <div class="sb-head">
+        <h3>Kategorie</h3>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="pb-list" id="pbList"></div>
+    </aside>
+    <main id="main">
+      <div id="dashboard">
+        <div class="dt">SOC Playbook Library</div>
+        <div class="ds">Operační bezpečnostní playbooky · NIST SP 800-61 · MITRE ATT&CK · ISO/IEC 27035</div>
+        <div class="sgrid">
+          <div class="scard"><div class="sl">Celkem playbooků</div><div class="sv2" id="d-total">—</div><div class="sd">Všechny kategorie</div></div>
+          <div class="scard"><div class="sl">Critical / P1</div><div class="sv2" style="color:var(--p1)" id="d-p1">—</div><div class="sd">Okamžitá eskalace</div></div>
+          <div class="scard"><div class="sl">High / P2</div><div class="sv2" style="color:var(--p2)" id="d-p2">—</div><div class="sd">Eskalace do 1h</div></div>
+          <div class="scard"><div class="sl">Kategorie</div><div class="sv2" id="d-cats">—</div><div class="sd">Unikátních oblastí</div></div>
+        </div>
+        <div class="sec">Všechny playbooky</div>
+        <div class="pgrid" id="pgrid"></div>
+      </div>
+      <div id="pbview">
+        <div class="pb-header" id="pbHeader"></div>
+        <div id="pbContent"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+// ── Password protection ──────────────────────────────────────────────────────
+(function(){
+  const HASH='5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8';
+  const KEY='soc_auth';
+  async function sha256(msg){
+    const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(msg));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  function showLogin(){
+    document.body.innerHTML='';
+    document.body.style.cssText='background:#080d1a;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:Segoe UI,system-ui,sans-serif';
+    const box=document.createElement('div');
+    box.style.cssText='background:#0c1220;border:1px solid rgba(0,200,255,0.3);border-radius:16px;padding:48px 40px;width:360px;text-align:center';
+    box.innerHTML=`
+      <div style="width:52px;height:52px;background:linear-gradient(135deg,#00c8ff,#0080ff);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div style="font-size:18px;font-weight:700;color:#e0e6f5;margin-bottom:6px">SOC Playbook Library</div>
+      <div style="font-size:13px;color:#8899b4;margin-bottom:28px">Zadej přístupové heslo</div>
+      <input id="pwd" type="password" placeholder="Heslo" style="width:100%;padding:11px 14px;background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#e0e6f5;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box"/>
+      <div id="err" style="color:#ff3366;font-size:12px;height:18px;margin-bottom:8px"></div>
+      <button id="btn" style="width:100%;padding:11px;background:#00c8ff;border:none;border-radius:8px;color:#000;font-weight:700;font-size:14px;cursor:pointer">Přihlásit se</button>
+    `;
+    document.body.appendChild(box);
+    const inp=document.getElementById('pwd'),btn=document.getElementById('btn'),err=document.getElementById('err');
+    async function attempt(){
+      const h=await sha256(inp.value);
+      if(h===HASH){sessionStorage.setItem(KEY,'1');location.reload();}
+      else{err.textContent='Nesprávné heslo';inp.value='';inp.focus();}
+    }
+    btn.addEventListener('click',attempt);
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')attempt();});
+    inp.focus();
+  }
+  if(sessionStorage.getItem(KEY)!=='1'){
+    document.addEventListener('DOMContentLoaded',showLogin);
+  }
+})();
+
+// ── App state ────────────────────────────────────────────────────────────────
+let MANIFEST = [];
+let currentPB = null;
+let mdCache = {};
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+async function boot(){
+  try {
+    const r = await fetch('manifest.json');
+    if(!r.ok) throw new Error('manifest.json not found');
+    const data = await r.json();
+    MANIFEST = data.playbooks;
+    renderApp();
+  } catch(e){
+    document.getElementById('dashboard').innerHTML =
+      `<div class="error-box">⚠ Chyba při načítání manifest.json: ${e.message}</div>`;
+  }
+}
+
+// ── Severity helpers ─────────────────────────────────────────────────────────
+const SEV_COLOR = {P1:'#dc2626',P2:'#ea580c',P3:'#ca8a04',P4:'#059669','N/A':'#9ca3af'};
+const CAT_COLOR = {
+  Foundation:'#0066cc',Email:'#ea580c',Endpoint:'#dc2626',Critical:'#991b1b',
+  Identity:'#7c3aed',Network:'#0891b2',Cloud:'#0d9488',Exfiltration:'#be185d'
+};
+function sevClass(sv){ return 'sv sv-'+(sv||'na').toLowerCase().replace('/',''); }
+
+// ── Render app ───────────────────────────────────────────────────────────────
+function renderApp(){
+  const total = MANIFEST.length;
+  const p1 = MANIFEST.filter(p=>p.severity==='P1').length;
+  const p2 = MANIFEST.filter(p=>p.severity==='P2').length;
+  const cats = [...new Set(MANIFEST.map(p=>p.category))].length;
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statP1').textContent = p1;
+  document.getElementById('statP2').textContent = p2;
+  document.getElementById('d-total').textContent = total;
+  document.getElementById('d-p1').textContent = p1;
+  document.getElementById('d-p2').textContent = p2;
+  document.getElementById('d-cats').textContent = cats;
+
+  renderChips();
+  renderSidebar(MANIFEST);
+  renderPGrid(MANIFEST);
+}
+
+function renderChips(){
+  const cats = ['Vše',...[...new Set(MANIFEST.map(p=>p.category))]];
+  document.getElementById('chips').innerHTML = cats.map((c,i)=>
+    `<button class="chip${i===0?' active':''}" onclick="filterCat('${c}',this)">${c}</button>`
+  ).join('');
+}
+
+function renderSidebar(list){
+  const el = document.getElementById('pbList');
+  if(!list.length){el.innerHTML='<div style="padding:20px;text-align:center;font-size:12px;color:var(--text3)">Žádný výsledek</div>';return;}
+  el.innerHTML = list.map(p=>{
+    const sc = SEV_COLOR[p.severity]||'#9ca3af';
+    return `<button class="pb-item${currentPB===p.id?' active':''}" onclick="openPB('${p.id}')" style="border-left:3px solid ${sc}">
+      <div class="pb-item-top">
+        <span class="pb-id" style="color:${sc};background:${sc}18">${p.id}</span>
+        <span class="pb-name">${p.title}</span>
+      </div>
+      <div class="pb-bot">
+        <span class="${sevClass(p.severity)}">${p.severity}</span>
+        <span class="tag" style="font-size:10px">${p.category}</span>
+        <span class="pb-ver">v${p.version}</span>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+function renderPGrid(list){
+  document.getElementById('pgrid').innerHTML = list.map(p=>{
+    const cc = CAT_COLOR[p.category]||'#9ca3af';
+    return `<div class="pgc cat-${p.category}" onclick="openPB('${p.id}')" style="border-left:3px solid ${cc}">
+      <div class="pgc-id" style="color:${cc}">${p.id} · v${p.version}</div>
+      <div class="pgc-t">${p.title}</div>
+      <div class="pgc-tags">${p.tags.slice(0,4).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Filter & Search ──────────────────────────────────────────────────────────
+function filterCat(cat,el){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  const list = cat==='Vše' ? MANIFEST : MANIFEST.filter(p=>p.category===cat);
+  renderSidebar(list);
+  if(!currentPB) renderPGrid(list);
+}
+
+function doSearch(q){
+  q = q.toLowerCase().trim();
+  if(!q){renderSidebar(MANIFEST);if(!currentPB)renderPGrid(MANIFEST);return;}
+  const list = MANIFEST.filter(p=>
+    p.title.toLowerCase().includes(q)||
+    p.id.toLowerCase().includes(q)||
+    p.category.toLowerCase().includes(q)||
+    p.tags.some(t=>t.toLowerCase().includes(q))||
+    (p.mitre&&p.mitre.some(m=>m.toLowerCase().includes(q)))
+  );
+  renderSidebar(list);
+  if(!currentPB) renderPGrid(list);
+}
+
+// ── Open playbook ─────────────────────────────────────────────────────────────
+async function openPB(id){
+  currentPB = id;
+  const pb = MANIFEST.find(p=>p.id===id);
+  if(!pb) return;
+
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('pbview').style.display='block';
+  document.querySelectorAll('.pb-item').forEach(el=>{
+    el.classList.toggle('active', el.querySelector('.pb-id')?.textContent===id);
+  });
+  document.getElementById('main').scrollTop=0;
+
+  // Header
+  const sc = SEV_COLOR[pb.severity]||'#9ca3af';
+  const cc = CAT_COLOR[pb.category]||'#9ca3af';
+  document.getElementById('pbHeader').innerHTML = `
+    <div class="pb-header-left">
+      <div class="pb-header-id">${pb.id}</div>
+      <div class="pb-header-title">${pb.title}</div>
+      <div class="pb-header-meta">
+        <span class="pbm pbm-cat" style="background:${cc}18;color:${cc}">${pb.category}</span>
+        <span class="pbm" style="background:${sc}18;color:${sc}">${pb.severity}</span>
+        <span class="pbm pbm-ver">v${pb.version}</span>
+        <span class="pbm pbm-status">${pb.status}</span>
+      </div>
+      <div class="pb-tags-row">${pb.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+    <button class="pb-back" onclick="showDash()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+      Zpět
+    </button>
+  `;
+
+  // Content — load from cache or fetch
+  const content = document.getElementById('pbContent');
+  if(mdCache[id]){
+    content.innerHTML = '<div class="md-content">'+mdCache[id]+'</div>';
+    return;
+  }
+
+  content.innerHTML = '<div class="loading"><div class="spinner"></div> Načítám playbook…</div>';
+
+  try {
+    const r = await fetch(pb.file);
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    const text = await r.text();
+    const html = marked.parse(text);
+    mdCache[id] = html;
+    content.innerHTML = '<div class="md-content">'+html+'</div>';
+  } catch(e){
+    content.innerHTML = `<div class="error-box">⚠ Chyba při načítání ${pb.file}: ${e.message}<br><br>Ujisti se, že soubor existuje v repozitáři.</div>`;
+  }
+}
+
+// ── Show dashboard ────────────────────────────────────────────────────────────
+function showDash(){
+  currentPB = null;
+  document.getElementById('dashboard').style.display='block';
+  document.getElementById('pbview').style.display='none';
+  document.querySelectorAll('.pb-item').forEach(el=>el.classList.remove('active'));
+  renderPGrid(MANIFEST);
+  document.getElementById('searchInput').value='';
+  renderSidebar(MANIFEST);
+  renderChips();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', boot);
+</script>
+</body>
+</html>
