@@ -4,24 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SOC Playbook Library v2.1</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js">
+
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#f0f4f8;color:#111827;overflow:hidden}
+body{background:radial-gradient(ellipse at 2% 2%,rgba(124,58,237,.12) 0%,transparent 35%),radial-gradient(ellipse at 98% 98%,rgba(61,26,110,.14) 0%,transparent 35%),#ede9f6;color:#111827;overflow:hidden}
 :root{
-  --bg0:#f0f4f8;--bg1:#ffffff;--bg2:#f5f7fb;--bg3:#e8edf5;
-  --border:rgba(0,0,0,0.08);--border2:rgba(0,102,204,0.25);
-  --accent:#0066cc;--accent2:#059669;--warn:#d97706;--danger:#dc2626;
+  --bg0:#ede9f6;--bg1:#faf9fd;--bg2:#f0ecfb;--bg3:#e3daf4;
+  --border:rgba(61,26,110,0.10);--border2:rgba(61,26,110,0.28);
+  --accent:#462870;--accent2:#059669;--warn:#d97706;--danger:#dc2626;
   --text1:#111827;--text2:#4b5563;--text3:#9ca3af;
   --p1:#dc2626;--p2:#ea580c;--p3:#ca8a04;--p4:#059669;
   --sw:280px
 }
 #app{display:flex;flex-direction:column;height:100vh}
-header{height:54px;background:var(--bg1);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;z-index:10}
+header{height:54px;background:var(--bg1);border-bottom:2px solid transparent;border-image:linear-gradient(90deg,#462870,#7c3aed,#462870) 1;box-shadow:0 1px 6px rgba(0,0,0,.07);display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;z-index:10}
 .layout{display:flex;flex:1;overflow:hidden}
 .logo{display:flex;align-items:center;gap:10px;white-space:nowrap;cursor:pointer}
-.logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),#0080ff);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon{width:30px;height:30px;background:linear-gradient(135deg,#462870,#7c3aed);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .logo-text{font-size:13px;font-weight:700;letter-spacing:.3px}
 .logo-text span{color:var(--accent)}
 .hsearch{flex:1;max-width:380px;position:relative}
@@ -38,6 +40,9 @@ aside{width:var(--sw);background:var(--bg1);border-right:1px solid var(--border)
 .chip{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);color:var(--text2);background:transparent;transition:all .15s;user-select:none}
 .chip:hover{border-color:var(--accent);color:var(--accent)}
 .chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.chip-cat{border-color:var(--chip-cat,var(--border));color:var(--chip-cat,var(--text2))}
+.chip-cat:hover{border-color:var(--chip-cat,var(--accent));color:var(--chip-cat,var(--accent));background:color-mix(in srgb,var(--chip-cat,var(--accent)) 8%,transparent)}
+.chip-cat.active{background:var(--chip-cat,var(--accent));color:#fff;border-color:var(--chip-cat,var(--accent))}
 .pb-list{flex:1;overflow-y:auto;padding:8px}
 .pb-list::-webkit-scrollbar{width:3px}
 .pb-list::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
@@ -62,11 +67,16 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
 .dt-h{font-size:22px;font-weight:800;color:var(--text1);margin-bottom:3px}
 .ds{font-size:13px;color:var(--text2);margin-bottom:24px}
 .sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
-.scard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px}
+.scard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;border-top:3px solid var(--border)}
+.scard-blue{border-top-color:var(--accent);background:linear-gradient(160deg,rgba(61,26,110,.05) 0%,var(--bg2) 60%)}
+.scard-red{border-top-color:var(--p1);background:linear-gradient(160deg,rgba(220,38,38,.05) 0%,var(--bg2) 60%)}
+.scard-orange{border-top-color:var(--p2);background:linear-gradient(160deg,rgba(234,88,12,.05) 0%,var(--bg2) 60%)}
+.scard-green{border-top-color:var(--accent2);background:linear-gradient(160deg,rgba(5,150,105,.05) 0%,var(--bg2) 60%)}
 .sl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
 .sv2{font-size:26px;font-weight:800;color:var(--accent)}
 .sd{font-size:11px;color:var(--text2);margin-top:3px}
-.sec{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+.sec{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:13px;display:flex;align-items:center;gap:8px;font-weight:700}
+.sec::before{content:'';width:3px;height:14px;background:var(--accent);border-radius:2px}
 .sec::after{content:'';flex:1;height:1px;background:var(--border)}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:26px}
 .pgc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:15px 15px 15px 14px;cursor:pointer;transition:all .2s}
@@ -106,7 +116,7 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
 .ov-lbl{color:var(--text3)}
 .ov-val{font-weight:600;color:var(--text1)}
 .mitre-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
-.mc-chip{padding:5px 10px;border-radius:5px;font-size:11px;font-weight:600;background:rgba(0,102,204,.08);border:1px solid rgba(0,102,204,.2);color:var(--accent)}
+.mc-chip{padding:5px 10px;border-radius:5px;font-size:11px;font-weight:600;background:rgba(8,145,178,.08);border:1px solid rgba(8,145,178,.25);color:#0891b2}
 .dtree-status{display:flex;align-items:center;gap:8px;font-size:13px;padding:12px 16px;background:var(--bg2);border-radius:8px;border:1px solid var(--border)}
 /* Decision tree */
 .dt-con{max-width:680px}
@@ -160,7 +170,7 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error-box{padding:20px;background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.2);border-radius:10px;color:var(--danger);font-size:13px}
 /* Category colors */
-.cat-Foundation{border-left-color:#0066cc!important}
+.cat-Foundation{border-left-color:#462870!important}
 .cat-Email{border-left-color:#ea580c!important}
 .cat-Endpoint{border-left-color:#dc2626!important}
 .cat-Critical{border-left-color:#991b1b!important}
@@ -170,16 +180,27 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
 .cat-Exfiltration{border-left-color:#be185d!important}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px}
+.dash-tab.active{color:var(--accent)!important;border-bottom-color:var(--accent)!important}
 </style>
 </head>
 <body>
 <div id="app">
   <header>
-    <div class="logo" onclick="showDash()">
-      <div class="logo-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div class="logo-text">SOC <span>Playbook</span> Library</div>
+    <div class="logo" onclick="showDash()" style="gap:0">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.27559 170.07874" width="110" height="32" style="display:block">
+  <g>
+    <polygon fill="#fff" points="86.613 39.148 40.379 129.902 62.893 129.902 86.613 83.356 94.404 98.634 71.647 118.68 104.602 118.68 110.334 129.902 132.881 129.902 86.613 39.148"/>
+    <rect fill="#fff" x="138.82111" y="39.14731" width="20.07924" height="90.75366"/>
+    <rect fill="#fff" x="170.6082" y="65.1644" width="20.04661" height="64.73657"/>
+    <polygon fill="#fff" points="170.605 39.148 170.605 56.859 190.652 39.148 170.605 39.148"/>
+    <path fill="#fff" d="M202.355,65.16611v64.73657h20.07923V89.40076a13.48722,13.48722,0,0,1,26.53145,3.397v37.10488H268.2602V92.17775A28.142,28.142,0,0,0,240.212,64.13737a27.7817,27.7817,0,0,0-17.77777,6.418V65.16611Z"/>
+    <polygon fill="#fff" points="276.016 65.166 276.016 80.714 282.23 80.714 282.23 129.903 302.309 129.903 302.309 80.714 317.579 80.714 317.579 65.166 302.309 65.166 302.309 41.999 276.016 65.166"/>
+    <path fill="#fff" d="M382.48939,65.16611V102.891a28.01858,28.01858,0,0,0,45.82437,21.655v5.35664h20.08079V65.16611H428.31376V105.668a13.485,13.485,0,0,1-26.53615-3.39705V65.16611Z"/>
+    <path fill="#fff" d="M462.1902,95.37169c4.59827,5.69853,12.42731,8.30459,18.9852,11.122,1.78088.75214,5.07848,1.7871,5.07848,4.01709,0,1.71407-1.95957,2.57188-3.43746,2.777-4.28749.58741-12.24861-2.33567-14.99923-4.22223l-12.836,11.29293c16.58273,15.85858,54.09633,15.13907,52.00463-11.15462a19.69585,19.69585,0,0,0-7.453-13.8648c-4.11657-3.29914-10.56723-5.56177-15.51516-7.65811-2.12432-.85781-8.68064-3.05517-4.90756-5.97048a5.896,5.896,0,0,1,3.84616-.92307c3.98293.06527,8.71953,2.0575,11.97825,4.39316l12.77076-11.26029c-12.49413-14.86246-50.90439-13.97047-49.42655,11.049a17.89173,17.89173,0,0,0,3.91146,10.40247"/>
+    <polygon fill="#fff" points="513.334 65.166 513.334 80.714 519.548 80.714 519.548 129.903 539.627 129.903 539.627 80.714 554.897 80.714 554.897 65.166 539.627 65.166 539.627 41.999 513.334 65.166"/>
+    <path fill="#fff" d="M366.39148,82.77434l8.03419-15.79175A27.79233,27.79233,0,0,0,344.393,70.55834V65.16907H324.31378v64.73035H344.393V89.3975a13.4609,13.4609,0,0,1,21.99844-6.62316"/>
+  </g>
+</svg>
     </div>
     <div class="hsearch">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -204,13 +225,20 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
         <div class="dt-h">SOC Playbook Library</div>
         <div class="ds">Operační bezpečnostní playbooky · NIST SP 800-61 · MITRE ATT&amp;CK · ISO/IEC 27035</div>
         <div class="sgrid">
-          <div class="scard"><div class="sl">Celkem playbooků</div><div class="sv2" id="d-total">—</div><div class="sd">Všechny kategorie</div></div>
-          <div class="scard"><div class="sl">Critical / P1</div><div class="sv2" style="color:var(--p1)" id="d-p1">—</div><div class="sd">Okamžitá eskalace</div></div>
-          <div class="scard"><div class="sl">High / P2</div><div class="sv2" style="color:var(--p2)" id="d-p2">—</div><div class="sd">Eskalace do 1h</div></div>
-          <div class="scard"><div class="sl">Kategorie</div><div class="sv2" id="d-cats">—</div><div class="sd">Unikátních oblastí</div></div>
+          <div class="scard scard-blue"><div class="sl">Celkem playbooků</div><div class="sv2" id="d-total">—</div><div class="sd">Všechny kategorie</div></div>
+          <div class="scard scard-red"><div class="sl">Critical / P1</div><div class="sv2" style="color:var(--p1)" id="d-p1">—</div><div class="sd">Okamžitá eskalace</div></div>
+          <div class="scard scard-orange"><div class="sl">High / P2</div><div class="sv2" style="color:var(--p2)" id="d-p2">—</div><div class="sd">Eskalace do 1h</div></div>
+          <div class="scard scard-green"><div class="sl">Kategorie</div><div class="sv2" id="d-cats">—</div><div class="sd">Unikátních oblastí</div></div>
         </div>
-        <div class="sec">Všechny playbooky</div>
-        <div class="pgrid" id="pgrid"></div>
+        <div style="display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--border)">
+          <button class="dash-tab active" onclick="showDashTab('grid',this)" style="padding:9px 20px;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s" onmouseover="this.style.color='var(--text1)'" onmouseout="if(!this.classList.contains('active'))this.style.color='var(--text2)'">📋 Playbooky</button>
+          <button class="dash-tab" onclick="showDashTab('mitre',this)" style="padding:9px 20px;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s" onmouseover="this.style.color='var(--text1)'" onmouseout="if(!this.classList.contains('active'))this.style.color='var(--text2)'">🎯 MITRE Coverage</button>
+        </div>
+        <div id="dash-grid">
+          <div class="sec">Všechny playbooky</div>
+          <div class="pgrid" id="pgrid"></div>
+        </div>
+        <div id="dash-mitre" style="display:none;padding-bottom:30px"></div>
       </div>
       <div id="pbview">
         <div class="pb-header" id="pbHeader"></div>
@@ -232,18 +260,39 @@ main::-webkit-scrollbar-thumb{background:var(--bg2);border-radius:3px}
   }
   function showLogin(){
     document.body.innerHTML='';
-    document.body.style.cssText='background:#080d1a;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:Segoe UI,system-ui,sans-serif';
+    document.body.style.cssText='background:radial-gradient(ellipse at 5% 5%,rgba(124,58,237,.28) 0%,transparent 45%),radial-gradient(ellipse at 95% 95%,rgba(61,26,110,.32) 0%,transparent 45%),#f7f5fb;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:Segoe UI,system-ui,sans-serif';
     const box=document.createElement('div');
-    box.style.cssText='background:#0c1220;border:1px solid rgba(0,200,255,0.3);border-radius:16px;padding:48px 40px;width:360px;text-align:center';
+    box.style.cssText='background:#ffffff;border:1px solid rgba(61,26,110,0.12);border-radius:16px;padding:48px 40px;width:360px;text-align:center;box-shadow:0 8px 40px rgba(61,26,110,0.12)';
     box.innerHTML=`
-      <div style="width:52px;height:52px;background:linear-gradient(135deg,#00c8ff,#0080ff);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <div style="margin:0 auto 24px;display:flex;align-items:center;justify-content:center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.27559 170.07874" width="180" height="52" style="display:block">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #462870;
+      }
+    </style>
+  </defs>
+  <g>
+    <polygon class="cls-1" points="86.613 39.148 40.379 129.902 62.893 129.902 86.613 83.356 94.404 98.634 71.647 118.68 104.602 118.68 110.334 129.902 132.881 129.902 86.613 39.148"/>
+    <rect class="cls-1" x="138.82111" y="39.14731" width="20.07924" height="90.75366"/>
+    <rect class="cls-1" x="170.6082" y="65.1644" width="20.04661" height="64.73657"/>
+    <polygon class="cls-1" points="170.605 39.148 170.605 56.859 190.652 39.148 170.605 39.148"/>
+    <path class="cls-1" d="M202.355,65.16611v64.73657h20.07923V89.40076a13.48722,13.48722,0,0,1,26.53145,3.397v37.10488H268.2602V92.17775A28.142,28.142,0,0,0,240.212,64.13737a27.7817,27.7817,0,0,0-17.77777,6.418V65.16611Z"/>
+    <polygon class="cls-1" points="276.016 65.166 276.016 80.714 282.23 80.714 282.23 129.903 302.309 129.903 302.309 80.714 317.579 80.714 317.579 65.166 302.309 65.166 302.309 41.999 276.016 65.166"/>
+    <path class="cls-1" d="M382.48939,65.16611V102.891a28.01858,28.01858,0,0,0,45.82437,21.655v5.35664h20.08079V65.16611H428.31376V105.668a13.485,13.485,0,0,1-26.53615-3.39705V65.16611Z"/>
+    <path class="cls-1" d="M462.1902,95.37169c4.59827,5.69853,12.42731,8.30459,18.9852,11.122,1.78088.75214,5.07848,1.7871,5.07848,4.01709,0,1.71407-1.95957,2.57188-3.43746,2.777-4.28749.58741-12.24861-2.33567-14.99923-4.22223l-12.836,11.29293c16.58273,15.85858,54.09633,15.13907,52.00463-11.15462a19.69585,19.69585,0,0,0-7.453-13.8648c-4.11657-3.29914-10.56723-5.56177-15.51516-7.65811-2.12432-.85781-8.68064-3.05517-4.90756-5.97048a5.896,5.896,0,0,1,3.84616-.92307c3.98293.06527,8.71953,2.0575,11.97825,4.39316l12.77076-11.26029c-12.49413-14.86246-50.90439-13.97047-49.42655,11.049a17.89173,17.89173,0,0,0,3.91146,10.40247"/>
+    <polygon class="cls-1" points="513.334 65.166 513.334 80.714 519.548 80.714 519.548 129.903 539.627 129.903 539.627 80.714 554.897 80.714 554.897 65.166 539.627 65.166 539.627 41.999 513.334 65.166"/>
+    <path class="cls-1" d="M366.39148,82.77434l8.03419-15.79175A27.79233,27.79233,0,0,0,344.393,70.55834V65.16907H324.31378v64.73035H344.393V89.3975a13.4609,13.4609,0,0,1,21.99844-6.62316"/>
+  </g>
+</svg>
+
       </div>
-      <div style="font-size:18px;font-weight:700;color:#e0e6f5;margin-bottom:6px">SOC Playbook Library</div>
-      <div style="font-size:13px;color:#8899b4;margin-bottom:28px">Zadej přístupové heslo</div>
-      <input id="pwd" type="password" placeholder="Heslo" style="width:100%;padding:11px 14px;background:#111827;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#e0e6f5;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box"/>
-      <div id="err" style="color:#ff3366;font-size:12px;height:18px;margin-bottom:8px"></div>
-      <button id="btn" style="width:100%;padding:11px;background:#00c8ff;border:none;border-radius:8px;color:#000;font-weight:700;font-size:14px;cursor:pointer">Přihlásit se</button>
+      <div style="font-size:13px;font-weight:500;color:#7c5aaa;margin-bottom:6px">SOC Playbook Library</div>
+      <div style="font-size:13px;color:#9980bb;margin-bottom:28px">Zadej přístupové heslo</div>
+      <input id="pwd" type="password" placeholder="Heslo" style="width:100%;padding:11px 14px;background:#f7f4fc;border:1px solid rgba(61,26,110,0.20);border-radius:8px;color:#1a0a3d;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box"/>
+      <div id="err" style="color:#dc2626;font-size:12px;height:18px;margin-bottom:8px"></div>
+      <button id="btn" style="width:100%;padding:11px;background:linear-gradient(135deg,#462870,#7c3aed);border:none;border-radius:8px;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Přihlásit se</button>
     `;
     document.body.appendChild(box);
     const inp=document.getElementById('pwd'),btn=document.getElementById('btn'),err=document.getElementById('err');
@@ -432,9 +481,11 @@ function renderApp(){
 
 function renderChips(){
   const cats = ['Vše',...[...new Set(MANIFEST.map(p=>p.category))]];
-  document.getElementById('chips').innerHTML = cats.map((c,i)=>
-    `<button class="chip${i===0?' active':''}" onclick="filterCat('${c}',this)">${c}</button>`
-  ).join('');
+  document.getElementById('chips').innerHTML = cats.map((c,i)=>{
+    const catC = CAT_COLOR[c];
+    const style = catC ? `style="--chip-cat:${catC}"` : '';
+    return `<button class="chip chip-cat${i===0?' active':''}" onclick="filterCat('${c}',this)" data-cat="${c}" ${style}>${c}</button>`;
+  }).join('');
 }
 
 function renderSidebar(list){
@@ -461,10 +512,10 @@ function renderSidebar(list){
 function renderPGrid(list){
   document.getElementById('pgrid').innerHTML = list.map(p=>{
     const cc = CAT_COLOR[p.category]||'#9ca3af';
-    return `<div class="pgc cat-${p.category}" onclick="openPB('${p.id}')" style="border-left:3px solid ${cc}">
+    return `<div class="pgc cat-${p.category}" onclick="openPB('${p.id}')" style="border-left:3px solid ${cc};background:linear-gradient(135deg,${cc}08 0%,var(--bg2) 40%)">
       <div class="pgc-id" style="color:${cc}">${p.id} · v${p.version}</div>
       <div class="pgc-t">${p.title}</div>
-      <div class="pgc-tags">${p.tags.slice(0,4).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="pgc-tags">${p.tags.slice(0,4).map(t=>`<span class="tag" style="border:1px solid ${cc}22;color:${cc}">${t}</span>`).join('')}</div>
     </div>`;
   }).join('');
 }
@@ -701,6 +752,208 @@ function showDash(){
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', boot);
+
+// ══════════════════════════════════════════════════════════════════════════════
+// MITRE COVERAGE MATRIX
+// ══════════════════════════════════════════════════════════════════════════════
+
+const MITRE_TACTICS = [
+  {id:'TA0043', name:'Reconnaissance',       short:'Recon'},
+  {id:'TA0042', name:'Resource Development', short:'Resource Dev'},
+  {id:'TA0001', name:'Initial Access',       short:'Initial Access'},
+  {id:'TA0002', name:'Execution',            short:'Execution'},
+  {id:'TA0003', name:'Persistence',          short:'Persistence'},
+  {id:'TA0004', name:'Privilege Escalation', short:'Priv Escalation'},
+  {id:'TA0005', name:'Defense Evasion',      short:'Def Evasion'},
+  {id:'TA0006', name:'Credential Access',    short:'Cred Access'},
+  {id:'TA0007', name:'Discovery',            short:'Discovery'},
+  {id:'TA0008', name:'Lateral Movement',     short:'Lateral Movement'},
+  {id:'TA0009', name:'Collection',           short:'Collection'},
+  {id:'TA0011', name:'Command & Control',    short:'C2'},
+  {id:'TA0010', name:'Exfiltration',         short:'Exfiltration'},
+  {id:'TA0040', name:'Impact',               short:'Impact'},
+];
+
+// covers: [{pb:'PB-xx', level:'full'|'partial'}]
+// gap:true = důležitá nepokrytá technika (zobrazit jako gap)
+const MITRE_TECH_MAP = {
+  // ── TA0043 Reconnaissance ──────────────────────────────────────────────────
+  'T1598':{name:'Phishing for Info',          tactic:'TA0043', covers:[{pb:'PB-01',level:'partial'}]},
+  'T1595':{name:'Active Scanning',            tactic:'TA0043', covers:[], gap:true},
+
+  // ── TA0042 Resource Development ───────────────────────────────────────────
+  'T1585':{name:'Establish Accounts',         tactic:'TA0042', covers:[{pb:'PB-09',level:'partial'}]},
+  'T1588':{name:'Obtain Capabilities',        tactic:'TA0042', covers:[], gap:true},
+
+  // ── TA0001 Initial Access ─────────────────────────────────────────────────
+  'T1566':{name:'Phishing',                   tactic:'TA0001', covers:[{pb:'PB-01',level:'full'},{pb:'PB-09',level:'full'}]},
+  'T1078':{name:'Valid Accounts',             tactic:'TA0001', covers:[{pb:'PB-04',level:'full'},{pb:'PB-05',level:'full'},{pb:'PB-10',level:'partial'},{pb:'PB-12',level:'full'}]},
+  'T1190':{name:'Exploit Public-Facing App',  tactic:'TA0001', covers:[], gap:true},
+
+  // ── TA0002 Execution ──────────────────────────────────────────────────────
+  'T1059':{name:'Command & Script Interpreter',tactic:'TA0002', covers:[{pb:'PB-02',level:'full'}]},
+  'T1204':{name:'User Execution',             tactic:'TA0002', covers:[{pb:'PB-01',level:'full'}]},
+  'T1047':{name:'Windows Management Instrumentation',tactic:'TA0002', covers:[], gap:true},
+
+  // ── TA0003 Persistence ────────────────────────────────────────────────────
+  'T1098':{name:'Account Manipulation',       tactic:'TA0003', covers:[{pb:'PB-05',level:'full'}]},
+  'T1053':{name:'Scheduled Task / Job',       tactic:'TA0003', covers:[], gap:true},
+  'T1547':{name:'Boot / Logon Autostart',     tactic:'TA0003', covers:[], gap:true},
+
+  // ── TA0004 Privilege Escalation ───────────────────────────────────────────
+  'T1134':{name:'Access Token Manipulation',  tactic:'TA0004', covers:[{pb:'PB-12',level:'partial'}]},
+  'T1068':{name:'Exploitation for Priv Esc',  tactic:'TA0004', covers:[], gap:true},
+
+  // ── TA0005 Defense Evasion ────────────────────────────────────────────────
+  'T1036':{name:'Masquerading',               tactic:'TA0005', covers:[{pb:'PB-02',level:'partial'},{pb:'PB-09',level:'partial'}]},
+  'T1055':{name:'Process Injection',          tactic:'TA0005', covers:[{pb:'PB-02',level:'full'}]},
+  'T1070':{name:'Indicator Removal',          tactic:'TA0005', covers:[{pb:'PB-02',level:'partial'}]},
+
+  // ── TA0006 Credential Access ──────────────────────────────────────────────
+  'T1110':{name:'Brute Force',                tactic:'TA0006', covers:[{pb:'PB-04',level:'full'},{pb:'PB-12',level:'full'}]},
+  'T1550':{name:'Use Alternate Auth Material',tactic:'TA0006', covers:[{pb:'PB-05',level:'full'}]},
+  'T1003':{name:'OS Credential Dumping',      tactic:'TA0006', covers:[], gap:true},
+
+  // ── TA0007 Discovery ──────────────────────────────────────────────────────
+  'T1083':{name:'File & Directory Discovery', tactic:'TA0007', covers:[{pb:'PB-03',level:'partial'}]},
+  'T1046':{name:'Network Service Scanning',   tactic:'TA0007', covers:[], gap:true},
+  'T1018':{name:'Remote System Discovery',    tactic:'TA0007', covers:[], gap:true},
+
+  // ── TA0008 Lateral Movement ───────────────────────────────────────────────
+  'T1534':{name:'Internal Spearphishing',     tactic:'TA0008', covers:[{pb:'PB-09',level:'full'}]},
+  'T1021':{name:'Remote Services',            tactic:'TA0008', covers:[{pb:'PB-04',level:'partial'}]},
+  'T1080':{name:'Taint Shared Content',       tactic:'TA0008', covers:[], gap:true},
+
+  // ── TA0009 Collection ─────────────────────────────────────────────────────
+  'T1530':{name:'Data from Cloud Storage',    tactic:'TA0009', covers:[{pb:'PB-10',level:'full'}]},
+  'T1114':{name:'Email Collection',           tactic:'TA0009', covers:[], gap:true},
+
+  // ── TA0011 Command & Control ──────────────────────────────────────────────
+  'T1071':{name:'Application Layer Protocol', tactic:'TA0011', covers:[{pb:'PB-08',level:'full'}]},
+  'T1095':{name:'Non-App Layer Protocol',     tactic:'TA0011', covers:[{pb:'PB-08',level:'full'}]},
+  'T1572':{name:'Protocol Tunneling',         tactic:'TA0011', covers:[{pb:'PB-08',level:'full'}]},
+  'T1090':{name:'Proxy',                      tactic:'TA0011', covers:[{pb:'PB-08',level:'partial'}]},
+  'T1102':{name:'Web Service',                tactic:'TA0011', covers:[{pb:'PB-08',level:'partial'}]},
+
+  // ── TA0010 Exfiltration ───────────────────────────────────────────────────
+  'T1048':{name:'Exfiltration Over Alt Protocol',    tactic:'TA0010', covers:[{pb:'PB-06',level:'full'}]},
+  'T1041':{name:'Exfiltration Over C2 Channel',      tactic:'TA0010', covers:[{pb:'PB-06',level:'full'}]},
+  'T1567':{name:'Exfiltration Over Web Service',     tactic:'TA0010', covers:[{pb:'PB-06',level:'full'}]},
+  'T1537':{name:'Transfer Data to Cloud Account',    tactic:'TA0010', covers:[{pb:'PB-10',level:'full'},{pb:'PB-06',level:'partial'}]},
+  'T1030':{name:'Data Transfer Size Limits',         tactic:'TA0010', covers:[{pb:'PB-06',level:'partial'}]},
+
+  // ── TA0040 Impact ─────────────────────────────────────────────────────────
+  'T1486':{name:'Data Encrypted for Impact',  tactic:'TA0040', covers:[{pb:'PB-03',level:'full'}]},
+  'T1490':{name:'Inhibit System Recovery',    tactic:'TA0040', covers:[{pb:'PB-03',level:'full'}]},
+  'T1489':{name:'Service Stop',               tactic:'TA0040', covers:[{pb:'PB-03',level:'full'}]},
+  'T1496':{name:'Resource Hijacking',         tactic:'TA0040', covers:[{pb:'PB-10',level:'full'}]},
+  'T1485':{name:'Data Destruction',           tactic:'TA0040', covers:[], gap:true},
+};
+
+function renderMitreMatrix(){
+  const el = document.getElementById('dash-mitre');
+  el.dataset.rendered = '1';
+
+  // Stats
+  const allT = Object.entries(MITRE_TECH_MAP);
+  const covered = allT.filter(([,t])=>t.covers && t.covers.length>0).length;
+  const partial = allT.filter(([,t])=>t.covers && t.covers.length>0 && t.covers.every(c=>c.level==='partial')).length;
+  const gaps = allT.filter(([,t])=>!t.covers || t.covers.length===0).length;
+
+  let html = `
+  <div style="display:flex;gap:16px;margin-bottom:22px;flex-wrap:wrap">
+    <div style="background:#059669${18..toString(16)};border:1px solid #05966940;border-radius:8px;padding:12px 18px;min-width:110px">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#059669;margin-bottom:2px">Pokryto</div>
+      <div style="font-size:24px;font-weight:800;color:#059669">${covered}</div>
+      <div style="font-size:11px;color:#059669;opacity:.7">technik</div>
+    </div>
+    <div style="background:#d9770618;border:1px solid #d9770640;border-radius:8px;padding:12px 18px;min-width:110px">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#d97706;margin-bottom:2px">Částečně</div>
+      <div style="font-size:24px;font-weight:800;color:#d97706">${partial}</div>
+      <div style="font-size:11px;color:#d97706;opacity:.7">technik</div>
+    </div>
+    <div style="background:#9ca3af18;border:1px solid #9ca3af40;border-radius:8px;padding:12px 18px;min-width:110px">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#6b7280;margin-bottom:2px">Gap</div>
+      <div style="font-size:24px;font-weight:800;color:#6b7280">${gaps}</div>
+      <div style="font-size:11px;color:#6b7280;opacity:.7">bez pokrytí</div>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563">
+        <div style="width:22px;height:14px;border-radius:3px;background:#7c3aed18;border:1px solid #7c3aed40"></div>Full coverage
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563">
+        <div style="width:22px;height:14px;border-radius:3px;background:#7c3aed08;border:1px dashed #7c3aed30"></div>Partial
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563">
+        <div style="width:22px;height:14px;border-radius:3px;background:#f3f4f6;border:1px dashed #d1d5db"></div>Gap
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(14,minmax(130px,1fr));gap:8px;overflow-x:auto;padding-bottom:12px">`;
+
+  MITRE_TACTICS.forEach(tac=>{
+    const techs = Object.entries(MITRE_TECH_MAP).filter(([,t])=>t.tactic===tac.id);
+    html += `<div style="min-width:130px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--accent),#1d4ed8);padding:7px 8px;border-radius:6px 6px 0 0;text-align:center;line-height:1.3">${tac.short}<div style="font-size:8px;opacity:.7;font-weight:500;margin-top:2px">${tac.id}</div></div>
+      <div style="display:flex;flex-direction:column;gap:3px;border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;padding:5px;background:var(--bg1)">`;
+
+    techs.forEach(([tid, tech])=>{
+      const hasCover = tech.covers && tech.covers.length > 0;
+      const allFull = hasCover && tech.covers.every(c=>c.level==='full');
+      const isGap = !hasCover;
+
+      // Pick primary color from first covering playbook's category
+      let cc = '#9ca3af';
+      if(hasCover){
+        const pb = MANIFEST_EMBEDDED.find(p=>p.id===tech.covers[0].pb);
+        if(pb) cc = CAT_COLOR[pb.category]||'#9ca3af';
+      }
+
+      const pbList = hasCover ? tech.covers.map(c=>c.pb).join(' · ') : '';
+      const count = hasCover ? ` <span style="opacity:.6;font-weight:500">(${tech.covers.length})</span>` : '';
+
+      if(isGap){
+        html += `<div style="background:#f9fafb;border:1px dashed #d1d5db;border-radius:4px;padding:6px 7px;cursor:default">
+          <div style="font-size:10px;font-weight:700;color:#9ca3af;margin-bottom:1px">${tid}</div>
+          <div style="font-size:10px;color:#9ca3af;line-height:1.3;margin-bottom:3px">${tech.name}</div>
+          <div style="font-size:9px;color:#d1d5db;font-style:italic">— gap —</div>
+        </div>`;
+      } else if(allFull){
+        html += `<div style="background:${cc}18;border:1px solid ${cc}40;border-radius:4px;padding:6px 7px;cursor:pointer" onclick="openPB('${tech.covers[0].pb}')" title="Otevřít ${tech.covers[0].pb}">
+          <div style="font-size:10px;font-weight:700;color:${cc};margin-bottom:1px">${tid}</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text1);line-height:1.3;margin-bottom:3px">${tech.name}</div>
+          <div style="font-size:9px;color:${cc};font-weight:600">${pbList}${count}</div>
+        </div>`;
+      } else {
+        html += `<div style="background:${cc}08;border:1px dashed ${cc}30;border-radius:4px;padding:6px 7px;cursor:pointer" onclick="openPB('${tech.covers[0].pb}')" title="Partial – ${tech.covers[0].pb}">
+          <div style="font-size:10px;font-weight:700;color:${cc};opacity:.7;margin-bottom:1px">${tid}</div>
+          <div style="font-size:10px;color:var(--text2);line-height:1.3;margin-bottom:3px">${tech.name}</div>
+          <div style="font-size:9px;color:${cc};opacity:.7;font-weight:600">${pbList}${count} ◐</div>
+        </div>`;
+      }
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  el.innerHTML = html;
+}
+
+function showDashTab(tab, el){
+  document.querySelectorAll('.dash-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const gridEl = document.getElementById('dash-grid');
+  const mitreEl = document.getElementById('dash-mitre');
+  if(tab==='grid'){
+    gridEl.style.display='';
+    mitreEl.style.display='none';
+  } else {
+    gridEl.style.display='none';
+    mitreEl.style.display='';
+    if(!mitreEl.dataset.rendered) renderMitreMatrix();
+  }
+}
+
+
 </script>
-</body>
-</html>
