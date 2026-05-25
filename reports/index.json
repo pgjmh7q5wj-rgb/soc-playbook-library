@@ -1,0 +1,12 @@
+{
+  "reports": [
+    {
+      "file": "update_2026-05.md",
+      "date": "2026-05-25",
+      "has_changes": true,
+      "xsoar_count": 7,
+      "mitre_count": 636
+    }
+  ],
+  "last_check": "2026-05-25"
+}

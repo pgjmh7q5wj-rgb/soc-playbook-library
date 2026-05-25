@@ -1,1 +1,44 @@
-{}
+{
+  "Microsoft365Defender": {
+    "old": "4.6.32",
+    "new": "4.6.33",
+    "purpose": "Advanced Hunting – DEPRECACE 31.1.2027",
+    "changelog": []
+  },
+  "MicrosoftDefenderAdvancedThreatProtection": {
+    "old": "1.20.35",
+    "new": "1.20.36",
+    "purpose": "EDR isolation, ATP akce",
+    "changelog": []
+  },
+  "FortiGate": {
+    "old": "2.0.16",
+    "new": "2.0.17",
+    "purpose": "Block IP, address groups",
+    "changelog": []
+  },
+  "CortexXDR": {
+    "old": "6.3.19",
+    "new": "6.3.20",
+    "purpose": "XDR isolation, query",
+    "changelog": []
+  },
+  "CrowdStrikeFalcon": {
+    "old": "2.10.2",
+    "new": "2.11.0",
+    "purpose": "Falcon contain host",
+    "changelog": []
+  },
+  "SentinelOne": {
+    "old": "3.3.8",
+    "new": "3.3.9",
+    "purpose": "Isolate machine",
+    "changelog": []
+  },
+  "Slack": {
+    "old": "3.8.0",
+    "new": "3.8.2",
+    "purpose": "Channel notifications",
+    "changelog": []
+  }
+}
