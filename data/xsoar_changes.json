@@ -1,20 +1,14 @@
 {
-  "MicrosoftGraphSecurity": {
-    "old": "2.4.0",
-    "new": "2.5.0",
-    "purpose": "Náhrada M365Defender po deprecaci",
-    "changelog": []
-  },
-  "CortexXDR": {
-    "old": "6.3.20",
-    "new": "6.3.21",
-    "purpose": "XDR isolation, query",
-    "changelog": []
-  },
   "CrowdStrikeFalcon": {
-    "old": "2.11.0",
-    "new": "2.11.3",
+    "old": "2.11.3",
+    "new": "2.11.4",
     "purpose": "Falcon contain host",
+    "changelog": []
+  },
+  "Slack": {
+    "old": "3.8.2",
+    "new": "3.8.3",
+    "purpose": "Channel notifications",
     "changelog": []
   }
 }
