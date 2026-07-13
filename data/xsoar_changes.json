@@ -1,67 +1,37 @@
 {
-  "MicrosoftGraphUser": {
-    "old": "1.7.5",
-    "new": "1.7.7",
-    "purpose": "Entra ID – disable, revoke, get user",
-    "changelog": []
-  },
-  "AzureLogAnalytics": {
-    "old": "1.1.57",
-    "new": "1.1.58",
-    "purpose": "KQL queries – Sentinel / Log Analytics",
-    "changelog": []
-  },
   "Microsoft365Defender": {
-    "old": "4.6.34",
-    "new": "4.6.35",
+    "old": "4.6.35",
+    "new": "4.6.36",
     "purpose": "Advanced Hunting – DEPRECACE 31.1.2027",
     "changelog": []
   },
   "MicrosoftDefenderAdvancedThreatProtection": {
-    "old": "1.20.39",
-    "new": "1.20.40",
+    "old": "1.20.40",
+    "new": "1.20.41",
     "purpose": "EDR isolation, ATP akce",
     "changelog": []
   },
-  "MicrosoftGraphSecurity": {
-    "old": "2.5.1",
-    "new": "2.5.3",
-    "purpose": "Náhrada M365Defender po deprecaci",
+  "AbuseDB": {
+    "old": "1.1.5",
+    "new": "1.1.6",
+    "purpose": "IP reputation (AbuseIPDB)",
     "changelog": []
   },
-  "VirusTotal": {
-    "old": "2.7.21",
-    "new": "2.7.22",
-    "purpose": "File / IP / URL reputation",
+  "FortiGate": {
+    "old": "2.0.18",
+    "new": "2.0.20",
+    "purpose": "Block IP, address groups",
     "changelog": []
   },
   "CortexXDR": {
-    "old": "6.3.27",
-    "new": "6.3.30",
+    "old": "6.3.30",
+    "new": "6.3.31",
     "purpose": "XDR isolation, query",
     "changelog": []
   },
-  "CrowdStrikeFalcon": {
-    "old": "2.12.1",
-    "new": "2.12.3",
-    "purpose": "Falcon contain host",
-    "changelog": []
-  },
-  "Jira": {
-    "old": "3.3.37",
-    "new": "3.3.39",
-    "purpose": "Create incident ticket",
-    "changelog": []
-  },
-  "MicrosoftTeams": {
-    "old": "1.5.57",
-    "new": "1.5.60",
-    "purpose": "Alert notifications",
-    "changelog": []
-  },
   "Slack": {
-    "old": "3.8.5",
-    "new": "3.8.8",
+    "old": "3.8.8",
+    "new": "3.8.9",
     "purpose": "Channel notifications",
     "changelog": []
   }
