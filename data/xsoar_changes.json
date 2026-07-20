@@ -1,37 +1,25 @@
 {
   "Microsoft365Defender": {
-    "old": "4.6.35",
-    "new": "4.6.36",
+    "old": "4.6.36",
+    "new": "4.6.37",
     "purpose": "Advanced Hunting – DEPRECACE 31.1.2027",
     "changelog": []
   },
-  "MicrosoftDefenderAdvancedThreatProtection": {
-    "old": "1.20.40",
-    "new": "1.20.41",
-    "purpose": "EDR isolation, ATP akce",
+  "MicrosoftGraphSecurity": {
+    "old": "2.5.3",
+    "new": "2.5.5",
+    "purpose": "Náhrada M365Defender po deprecaci",
     "changelog": []
   },
-  "AbuseDB": {
-    "old": "1.1.5",
-    "new": "1.1.6",
-    "purpose": "IP reputation (AbuseIPDB)",
-    "changelog": []
-  },
-  "FortiGate": {
-    "old": "2.0.18",
-    "new": "2.0.20",
-    "purpose": "Block IP, address groups",
-    "changelog": []
-  },
-  "CortexXDR": {
-    "old": "6.3.30",
-    "new": "6.3.31",
-    "purpose": "XDR isolation, query",
+  "SentinelOne": {
+    "old": "3.3.11",
+    "new": "3.3.12",
+    "purpose": "Isolate machine",
     "changelog": []
   },
   "Slack": {
-    "old": "3.8.8",
-    "new": "3.8.9",
+    "old": "3.8.9",
+    "new": "3.8.10",
     "purpose": "Channel notifications",
     "changelog": []
   }
