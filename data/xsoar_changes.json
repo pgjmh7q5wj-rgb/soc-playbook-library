@@ -1,43 +1,31 @@
 {
-  "Microsoft365Defender": {
-    "old": "4.6.37",
-    "new": "4.6.38",
-    "purpose": "Advanced Hunting – DEPRECACE 31.1.2027",
+  "AzureLogAnalytics": {
+    "old": "1.1.58",
+    "new": "1.1.59",
+    "purpose": "KQL queries – Sentinel / Log Analytics",
     "changelog": []
   },
-  "MicrosoftDefenderAdvancedThreatProtection": {
-    "old": "1.20.41",
-    "new": "1.20.42",
-    "purpose": "EDR isolation, ATP akce",
-    "changelog": []
-  },
-  "CortexXDR": {
-    "old": "6.3.31",
-    "new": "6.3.32",
-    "purpose": "XDR isolation, query",
+  "FortiGate": {
+    "old": "2.0.20",
+    "new": "2.0.22",
+    "purpose": "Block IP, address groups",
     "changelog": []
   },
   "CrowdStrikeFalcon": {
-    "old": "2.12.3",
-    "new": "2.12.4",
+    "old": "2.12.4",
+    "new": "2.12.5",
     "purpose": "Falcon contain host",
     "changelog": []
   },
-  "Jira": {
-    "old": "3.3.39",
-    "new": "3.3.40",
-    "purpose": "Create incident ticket",
-    "changelog": []
-  },
   "MicrosoftTeams": {
-    "old": "1.5.60",
-    "new": "1.5.61",
+    "old": "1.5.61",
+    "new": "1.5.62",
     "purpose": "Alert notifications",
     "changelog": []
   },
   "Slack": {
-    "old": "3.8.10",
-    "new": "3.8.11",
+    "old": "3.8.11",
+    "new": "3.8.12",
     "purpose": "Channel notifications",
     "changelog": []
   }

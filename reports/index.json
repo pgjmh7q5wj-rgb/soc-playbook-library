@@ -1,6 +1,13 @@
 {
   "reports": [
     {
+      "file": "update_2026-08.md",
+      "date": "2026-08-03",
+      "has_changes": true,
+      "xsoar_count": 5,
+      "mitre_count": 636
+    },
+    {
       "file": "update_2026-07.md",
       "date": "2026-07-06",
       "has_changes": true,
@@ -22,5 +29,5 @@
       "mitre_count": 636
     }
   ],
-  "last_check": "2026-07-27"
+  "last_check": "2026-08-03"
 }
