@@ -1,14 +1,26 @@
 {
+  "Microsoft365Defender": {
+    "old": "4.6.39",
+    "new": "4.6.40",
+    "purpose": "Advanced Hunting – DEPRECACE 31.1.2027",
+    "changelog": []
+  },
   "MicrosoftDefenderAdvancedThreatProtection": {
-    "old": "1.20.45",
-    "new": "1.20.47",
+    "old": "1.20.47",
+    "new": "1.21.0",
     "purpose": "EDR isolation, ATP akce",
     "changelog": []
   },
-  "CrowdStrikeFalcon": {
-    "old": "2.12.9",
-    "new": "2.13.1",
-    "purpose": "Falcon contain host",
+  "CortexXDR": {
+    "old": "6.3.37",
+    "new": "6.3.38",
+    "purpose": "XDR isolation, query",
+    "changelog": []
+  },
+  "Jira": {
+    "old": "3.3.42",
+    "new": "3.3.43",
+    "purpose": "Create incident ticket",
     "changelog": []
   }
 }
