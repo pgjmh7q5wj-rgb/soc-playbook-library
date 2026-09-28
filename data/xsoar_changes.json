@@ -1,26 +1,14 @@
 {
-  "Microsoft365Defender": {
-    "old": "4.6.39",
-    "new": "4.6.40",
-    "purpose": "Advanced Hunting – DEPRECACE 31.1.2027",
+  "MicrosoftGraphSecurity": {
+    "old": "2.6.1",
+    "new": "2.6.3",
+    "purpose": "Náhrada M365Defender po deprecaci",
     "changelog": []
   },
-  "MicrosoftDefenderAdvancedThreatProtection": {
-    "old": "1.20.47",
-    "new": "1.21.0",
-    "purpose": "EDR isolation, ATP akce",
-    "changelog": []
-  },
-  "CortexXDR": {
-    "old": "6.3.37",
-    "new": "6.3.38",
-    "purpose": "XDR isolation, query",
-    "changelog": []
-  },
-  "Jira": {
-    "old": "3.3.42",
-    "new": "3.3.43",
-    "purpose": "Create incident ticket",
+  "FortiGate": {
+    "old": "2.0.22",
+    "new": "2.0.23",
+    "purpose": "Block IP, address groups",
     "changelog": []
   }
 }
