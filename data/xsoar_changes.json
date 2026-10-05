@@ -1,14 +1,32 @@
 {
   "MicrosoftGraphSecurity": {
-    "old": "2.6.1",
-    "new": "2.6.3",
+    "old": "2.6.3",
+    "new": "2.6.4",
     "purpose": "Náhrada M365Defender po deprecaci",
     "changelog": []
   },
-  "FortiGate": {
-    "old": "2.0.22",
-    "new": "2.0.23",
-    "purpose": "Block IP, address groups",
+  "AbuseDB": {
+    "old": "1.1.6",
+    "new": "1.1.7",
+    "purpose": "IP reputation (AbuseIPDB)",
+    "changelog": []
+  },
+  "Jira": {
+    "old": "3.3.43",
+    "new": "3.3.44",
+    "purpose": "Create incident ticket",
+    "changelog": []
+  },
+  "MicrosoftTeams": {
+    "old": "1.5.63",
+    "new": "1.5.64",
+    "purpose": "Alert notifications",
+    "changelog": []
+  },
+  "Slack": {
+    "old": "3.8.20",
+    "new": "3.8.21",
+    "purpose": "Channel notifications",
     "changelog": []
   }
 }
