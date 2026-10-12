@@ -1,31 +1,43 @@
 {
-  "MicrosoftGraphSecurity": {
-    "old": "2.6.3",
-    "new": "2.6.4",
-    "purpose": "Náhrada M365Defender po deprecaci",
+  "MicrosoftGraphUser": {
+    "old": "1.7.9",
+    "new": "1.7.10",
+    "purpose": "Entra ID – disable, revoke, get user",
     "changelog": []
   },
-  "AbuseDB": {
-    "old": "1.1.6",
-    "new": "1.1.7",
-    "purpose": "IP reputation (AbuseIPDB)",
+  "VirusTotal": {
+    "old": "2.7.24",
+    "new": "2.7.25",
+    "purpose": "File / IP / URL reputation",
+    "changelog": []
+  },
+  "CortexXDR": {
+    "old": "6.3.38",
+    "new": "6.3.39",
+    "purpose": "XDR isolation, query",
+    "changelog": []
+  },
+  "CrowdStrikeFalcon": {
+    "old": "2.13.1",
+    "new": "2.14.0",
+    "purpose": "Falcon contain host",
     "changelog": []
   },
   "Jira": {
-    "old": "3.3.43",
-    "new": "3.3.44",
+    "old": "3.3.44",
+    "new": "3.3.45",
     "purpose": "Create incident ticket",
     "changelog": []
   },
   "MicrosoftTeams": {
-    "old": "1.5.63",
-    "new": "1.5.64",
+    "old": "1.5.64",
+    "new": "1.5.66",
     "purpose": "Alert notifications",
     "changelog": []
   },
   "Slack": {
-    "old": "3.8.20",
-    "new": "3.8.21",
+    "old": "3.8.21",
+    "new": "3.8.24",
     "purpose": "Channel notifications",
     "changelog": []
   }
