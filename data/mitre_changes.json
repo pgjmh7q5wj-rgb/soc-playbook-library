@@ -404,6 +404,20 @@
       ]
     },
     {
+      "id": "T1021.004",
+      "name": "SSH",
+      "platforms": [
+        "ESXi",
+        "Linux",
+        "macOS",
+        "Windows"
+      ],
+      "data_sources": [],
+      "affected_playbooks": [
+        "PB-04"
+      ]
+    },
+    {
       "id": "T1021.005",
       "name": "VNC",
       "platforms": [
@@ -1417,7 +1431,9 @@
       "id": "T1059.001",
       "name": "PowerShell",
       "platforms": [
-        "Windows"
+        "Windows",
+        "Linux",
+        "macOS"
       ],
       "data_sources": [],
       "affected_playbooks": [
@@ -7174,6 +7190,16 @@
       "affected_playbooks": []
     },
     {
+      "id": "T1685.007",
+      "name": "Impair Autonomous Defenses",
+      "platforms": [
+        "Windows",
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
       "id": "T1686",
       "name": "Disable or Modify System Firewall",
       "platforms": [
@@ -7246,6 +7272,74 @@
         "macOS",
         "Network Devices",
         "Windows"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1696",
+      "name": "Anti-Automation Evasion",
+      "platforms": [
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1696.001",
+      "name": "Automate CAPTCHA Completion",
+      "platforms": [
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1696.002",
+      "name": "Avoid CAPTCHA",
+      "platforms": [
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1697",
+      "name": "Steal Application Specific Passwords",
+      "platforms": [
+        "Office Suite",
+        "Identity Provider",
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1698",
+      "name": "Indirect Prompt Injection",
+      "platforms": [
+        "Windows",
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1699",
+      "name": "Direct Prompt Injection",
+      "platforms": [
+        "Windows",
+        "SaaS"
+      ],
+      "data_sources": [],
+      "affected_playbooks": []
+    },
+    {
+      "id": "T1700",
+      "name": "AI-Enabled Exfiltration",
+      "platforms": [
+        "Windows",
+        "SaaS"
       ],
       "data_sources": [],
       "affected_playbooks": []

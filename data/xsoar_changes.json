@@ -1,43 +1,49 @@
 {
-  "MicrosoftGraphUser": {
-    "old": "1.7.9",
-    "new": "1.7.10",
-    "purpose": "Entra ID – disable, revoke, get user",
+  "MicrosoftDefenderAdvancedThreatProtection": {
+    "old": "1.21.0",
+    "new": "1.21.1",
+    "purpose": "EDR isolation, ATP akce",
     "changelog": []
   },
-  "VirusTotal": {
-    "old": "2.7.24",
-    "new": "2.7.25",
-    "purpose": "File / IP / URL reputation",
+  "AbuseDB": {
+    "old": "1.1.7",
+    "new": "1.1.8",
+    "purpose": "IP reputation (AbuseIPDB)",
     "changelog": []
   },
   "CortexXDR": {
-    "old": "6.3.38",
-    "new": "6.3.39",
+    "old": "6.3.39",
+    "new": "6.3.40",
     "purpose": "XDR isolation, query",
     "changelog": []
   },
   "CrowdStrikeFalcon": {
-    "old": "2.13.1",
-    "new": "2.14.0",
+    "old": "2.14.0",
+    "new": "2.14.2",
     "purpose": "Falcon contain host",
     "changelog": []
   },
+  "SentinelOne": {
+    "old": "3.3.14",
+    "new": "3.3.15",
+    "purpose": "Isolate machine",
+    "changelog": []
+  },
   "Jira": {
-    "old": "3.3.44",
-    "new": "3.3.45",
+    "old": "3.3.45",
+    "new": "3.3.46",
     "purpose": "Create incident ticket",
     "changelog": []
   },
   "MicrosoftTeams": {
-    "old": "1.5.64",
-    "new": "1.5.66",
+    "old": "1.5.66",
+    "new": "1.5.67",
     "purpose": "Alert notifications",
     "changelog": []
   },
   "Slack": {
-    "old": "3.8.21",
-    "new": "3.8.24",
+    "old": "3.8.24",
+    "new": "3.8.27",
     "purpose": "Channel notifications",
     "changelog": []
   }
