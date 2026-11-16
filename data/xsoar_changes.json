@@ -1,19 +1,7 @@
 {
-  "CortexXDR": {
-    "old": "6.3.40",
-    "new": "6.3.41",
-    "purpose": "XDR isolation, query",
-    "changelog": []
-  },
-  "SentinelOne": {
-    "old": "3.3.17",
-    "new": "3.3.18",
-    "purpose": "Isolate machine",
-    "changelog": []
-  },
   "MicrosoftTeams": {
-    "old": "1.5.67",
-    "new": "1.5.68",
+    "old": "1.5.68",
+    "new": "1.5.69",
     "purpose": "Alert notifications",
     "changelog": []
   }
